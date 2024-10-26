@@ -8,6 +8,13 @@ class UserCreate(BaseModel):
     email: str  # Email address of the user; must be a string
     password: str  # Password of the user; must be a string
 
+class UserResponse(BaseModel):
+    id: int
+    username: str
+    email: str
+
+    class Config:
+        from_attributes = True
 # Request details model for login functionality
 class requestdetails(BaseModel):
     email: str  # Email address of the user; must be a string
@@ -31,3 +38,19 @@ class TokenCreate(BaseModel):
     refresh_token: str  # Refresh token; must be a string
     status: bool  # Status indicating whether the token is active; must be a boolean
     created_date: datetime.datetime  # Timestamp of when the token was created; must be a datetime object
+
+
+class OrganizationCreate(BaseModel):
+    name: str
+    description: str = None
+
+class OrganizationResponse(BaseModel):
+    id: int
+    name: str
+    description: str
+    owner_id: int
+    created_date: datetime.datetime
+    members: list[UserResponse]
+
+    class Config:
+        from_attributes = True

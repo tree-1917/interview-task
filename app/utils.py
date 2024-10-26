@@ -4,6 +4,8 @@ from passlib.context import CryptContext  # For password hashing and verificatio
 from datetime import datetime, timedelta  # For handling date and time
 from typing import Union, Any  # For type hinting
 from jose import jwt  # For creating and verifying JSON Web Tokens (JWTs)
+from sqlalchemy.orm import Session 
+from app.models import User, TokenTable
 
 # Constants for token expiration times and algorithms
 ACCESS_TOKEN_EXPIRE_MINUTES = 30  # Duration for access tokens (30 minutes)
@@ -52,3 +54,15 @@ def create_refresh_token(subject: Union[str, Any], expires_delta: int = None) :
     encoded_jwt = jwt.encode(to_encode, JWT_REFRESH_SECRET_KEY, ALGORITHM)
     
     return encoded_jwt  # Return the encoded refresh token
+
+# get current user 
+def get_user_from_token(session: Session, token: str):
+    try:
+        payload = jwt.decode(token, JWT_SECRET_KEY, algorithms=[ALGORITHM])
+        user_id: int = payload.get("sub")
+        user = session.query(User).filter(User.id == user_id).first()
+        if user is None:
+            raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="User not found")
+        return user
+    except jwt.JWTError:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid token")

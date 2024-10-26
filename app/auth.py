@@ -59,7 +59,8 @@ def login(request: schemas.requestdetails , db: Session = Depends(get_session)):
     access = create_access_token(user.id)
     refresh = create_refresh_token(user.id)
 
-    token_db = models.TokenTable(user_id=user.id, access_toke=access, refresh_toke=refresh, status=True)
+    # Correct the field names for TokenTable
+    token_db = models.TokenTable(user_id=user.id, access_token=access, refresh_token=refresh, status=True)
     db.add(token_db)
     db.commit()
     db.refresh(token_db)
@@ -100,7 +101,7 @@ def refresh_token(refresh_token: str, db: Session = Depends(get_session)):
     except jwt.PyJWTError:
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Invalid refresh token")
 
-@authRoute.get('/getusers', dependencies=[Depends(JWTBearer())])
+@authRoute.get('/test_auth', dependencies=[Depends(JWTBearer())])
 async def get_users(session: Session = Depends(get_session)):
     users = session.query(models.User).all()
     return users
