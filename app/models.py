@@ -1,6 +1,6 @@
 # Import necessary components from SQLAlchemy
 from sqlalchemy import Column, Integer, String, DateTime, Boolean  # Import column types for model definitions
-from database import Base  # Import the base class for SQLAlchemy models
+from app.database import Base  # Import the base class for SQLAlchemy models
 import datetime  # Import the datetime module for handling date and time
 
 # User model representing the 'users' table in the database
