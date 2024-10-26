@@ -29,8 +29,8 @@ To use this project, ensure you have the following installed:
 Clone the project repository to your local machine:
 
 ```bash
-git clone <repository-url>
-cd <repository-directory>
+git clone https://github.com/tree-1917/interview-task
+cd interview-task
 ```
 
 Replace `<repository-url>` with the actual URL of the repository and `<repository-directory>` with the name of the cloned directory.
