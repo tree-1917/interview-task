@@ -1,0 +1,9 @@
+services:
+  web: 
+    build: .
+    volumes:
+      - .:/app:ro                # Mount the current directory as read-only
+      - test_db:/app/test.db     # Mount a named volume for the test database
+
+volumes:
+  test_db:                     # Define the named volume
