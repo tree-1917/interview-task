@@ -33,8 +33,6 @@ git clone https://github.com/tree-1917/interview-task
 cd interview-task
 ```
 
-Replace `<repository-url>` with the actual URL of the repository and `<repository-directory>` with the name of the cloned directory.
-
 ### Set Up a Virtual Environment
 
 Create and activate a virtual environment:
