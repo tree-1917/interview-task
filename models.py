@@ -23,3 +23,4 @@ class TokenTable(Base):
     refresh_toke = Column(String(450), nullable=False)  # Refresh token column; cannot be null
     status = Column(Boolean)  # Status column indicating whether the token is active
     created_date = Column(DateTime, default=datetime.datetime.now)  # Timestamp of when the token was created; defaults to current time
+
