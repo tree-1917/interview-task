@@ -5,10 +5,10 @@ FROM python:3.10-slim
 WORKDIR /app
 
 # [3] Move requirements.txt 
-COPY requirement.txt .
+COPY requirements.txt .
 
 # [4] Install packages 
-RUN pip install --timeout=5000 -r requirement.txt
+RUN pip install --timeout=5000 -r requirements.txt
 
 # [5] Copy project files
 COPY . .
